@@ -1,0 +1,22 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - accApiKey
+    properties:
+      accApiKey:
+        type: string
+        description: Your ACC API key generated from settings page.
+  commandFunction: |-
+    (config) => ({
+      "command": "node",
+      "args": [
+        "build/index.js"
+      ],
+      "env": {
+        "BEARER_TOKEN_BEARERAUTH": config.accApiKey
+      }
+    })
+build:
+  dockerfile: Dockerfile-mcp
